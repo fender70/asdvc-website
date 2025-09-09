@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap');
+
+@layer base {
+  html {
+    font-family: 'Merriweather', serif;
+  }
+  
+  body {
+    @apply bg-gradient-to-br from-asdvc-gray-50 via-white to-asdvc-gray-100;
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-asdvc-forest text-white px-6 py-3 rounded-lg font-semibold hover:bg-asdvc-forest-light transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg active:scale-95;
+  }
+  
+  .btn-secondary {
+    @apply border-2 border-asdvc-navy text-asdvc-navy px-6 py-3 rounded-lg font-semibold hover:bg-asdvc-navy hover:text-white transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg active:scale-95;
+  }
+  
+  .btn-tertiary {
+    @apply bg-asdvc-gold text-asdvc-navy px-6 py-3 rounded-lg font-semibold hover:bg-asdvc-gold-light transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg active:scale-95;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-lg p-6 transition-all duration-300 ease-out hover:shadow-xl hover:scale-105;
+  }
+  
+  .section-header {
+    @apply text-center mb-12;
+  }
+  
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-asdvc-forest mb-4;
+  }
+  
+  .section-subtitle {
+    @apply text-lg text-asdvc-gray-600 max-w-2xl mx-auto;
+  }
+
+  /* Enhanced transition utilities */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .transition-bounce {
+    @apply transition-all duration-300 ease-bounce;
+  }
+
+  .transition-spring {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  /* Page transition animations */
+  .page-enter {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 400ms ease-out, transform 400ms ease-out;
+  }
+
+  .page-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .page-exit-active {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 300ms ease-in, transform 300ms ease-in;
+  }
+
+  /* Scroll animations */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 600ms ease-out, transform 600ms ease-out;
+  }
+
+  .fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-in-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 600ms ease-out, transform 600ms ease-out;
+  }
+
+  .fade-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .fade-in-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 600ms ease-out, transform 600ms ease-out;
+  }
+
+  .fade-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Image hover effects */
+  .image-hover {
+    @apply transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl;
+  }
+
+  /* Dropdown animations */
+  .dropdown-enter {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+
+  .dropdown-enter-active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 200ms ease-out, transform 200ms ease-out;
+  }
+
+  .dropdown-exit {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .dropdown-exit-active {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    transition: opacity 150ms ease-in, transform 150ms ease-in;
+  }
+}
