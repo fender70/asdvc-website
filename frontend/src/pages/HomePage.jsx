@@ -236,41 +236,41 @@ const HomePage = () => {
       {/* Quick Links Section */}
       <section className="py-16 bg-asdvc-forest">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 fade-in-up" id="quick-links-header">
+          <div className="text-center mb-12 fade-in-up visible" id="quick-links-header">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Get Involved
             </h2>
-            <p className="text-lg text-asdvc-gray-300 max-w-2xl mx-auto">
+            <p className="text-lg text-white max-w-2xl mx-auto">
               Explore opportunities to make a difference in your college community.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
             <Link to="/events" className="group">
-              <div className={`bg-gradient-to-br from-asdvc-navy to-asdvc-navy-light p-6 rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out ${visibleElements.has('quick-link-1') ? 'fade-in-up visible' : 'fade-in-up'}`} id="quick-link-1">
+              <div className="bg-gradient-to-br from-asdvc-navy to-asdvc-navy-light p-6 rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out" id="quick-link-1">
                  <h3 className="text-lg font-semibold text-white mb-2 group-hover:underline transition-all duration-300">Events</h3>
-                <p className="text-sm text-asdvc-gray-300">Upcoming campus events and activities</p>
+                <p className="text-sm text-white">Upcoming campus events and activities</p>
               </div>
             </Link>
             
             <Link to="/join" className="group">
-              <div className={`bg-gradient-to-br from-asdvc-navy to-asdvc-navy-light p-6 rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out ${visibleElements.has('quick-link-2') ? 'fade-in-up visible' : 'fade-in-up'}`} id="quick-link-2">
+              <div className="bg-gradient-to-br from-asdvc-navy to-asdvc-navy-light p-6 rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out" id="quick-link-2">
                  <h3 className="text-lg font-semibold text-white mb-2 group-hover:underline transition-all duration-300">Join Us</h3>
-                <p className="text-sm text-asdvc-gray-300">Become a member of ASDVC</p>
+                <p className="text-sm text-white">Become a member of ASDVC</p>
               </div>
             </Link>
             
             <Link to="/asdvc-boards" className="group">
-              <div className={`bg-gradient-to-br from-asdvc-navy to-asdvc-navy-light p-6 rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out ${visibleElements.has('quick-link-3') ? 'fade-in-up visible' : 'fade-in-up'}`} id="quick-link-3">
+              <div className="bg-gradient-to-br from-asdvc-navy to-asdvc-navy-light p-6 rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out" id="quick-link-3">
                  <h3 className="text-lg font-semibold text-white mb-2 group-hover:underline transition-all duration-300">Boards</h3>
-                <p className="text-sm text-asdvc-gray-300">Meet our leadership team</p>
+                <p className="text-sm text-white">Meet our leadership team</p>
               </div>
             </Link>
             
             <Link to="/projects-gallery" className="group">
-              <div className={`bg-gradient-to-br from-asdvc-navy to-asdvc-navy-light p-6 rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out ${visibleElements.has('quick-link-4') ? 'fade-in-up visible' : 'fade-in-up'}`} id="quick-link-4">
+              <div className="bg-gradient-to-br from-asdvc-navy to-asdvc-navy-light p-6 rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out" id="quick-link-4">
                  <h3 className="text-lg font-semibold text-white mb-2 group-hover:underline transition-all duration-300">Projects</h3>
-                <p className="text-sm text-asdvc-gray-300">See what we're working on</p>
+                <p className="text-sm text-white">See what we're working on</p>
               </div>
             </Link>
           </div>

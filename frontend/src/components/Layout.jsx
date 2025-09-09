@@ -8,6 +8,7 @@ const Layout = ({ children }) => {
   const [isBoardsOpen, setIsBoardsOpen] = useState(false)
   const [isDocumentsOpen, setIsDocumentsOpen] = useState(false)
   const [isDvcOpen, setIsDvcOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   // Scroll to top when route changes
   useEffect(() => {
@@ -18,16 +19,21 @@ const Layout = ({ children }) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       // Check if any dropdown is open
-      if (isCommitteesOpen || isBoardsOpen || isDocumentsOpen || isDvcOpen) {
+      if (isCommitteesOpen || isBoardsOpen || isDocumentsOpen || isDvcOpen || isMobileMenuOpen) {
         // Check if the click is outside the navigation area
         const navElement = document.querySelector('nav')
+        const mobileMenuElement = document.querySelector('[data-mobile-menu]')
+        const mobileMenuButton = event.target.closest('[aria-label="Toggle mobile menu"]')
         const isClickInsideNav = navElement && navElement.contains(event.target)
+        const isClickInsideMobileMenu = mobileMenuElement && mobileMenuElement.contains(event.target)
+        const isClickOnMobileButton = mobileMenuButton !== null
         
-        if (!isClickInsideNav) {
+        if (!isClickInsideNav && !isClickInsideMobileMenu && !isClickOnMobileButton) {
           setIsCommitteesOpen(false)
           setIsBoardsOpen(false)
           setIsDocumentsOpen(false)
           setIsDvcOpen(false)
+          setIsMobileMenuOpen(false)
         }
       }
     }
@@ -37,7 +43,7 @@ const Layout = ({ children }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside, true)
     }
-  }, [isCommitteesOpen, isBoardsOpen, isDocumentsOpen, isDvcOpen])
+  }, [isCommitteesOpen, isBoardsOpen, isDocumentsOpen, isDvcOpen, isMobileMenuOpen])
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -333,86 +339,243 @@ const Layout = ({ children }) => {
 
             {/* Mobile menu button */}
             <div className="md:hidden">
-              <button className="text-white hover:text-asdvc-gold">
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
+              <button 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-white hover:text-asdvc-gold transition-colors duration-200"
+                aria-expanded={isMobileMenuOpen}
+                aria-label="Toggle mobile menu"
+              >
+                {isMobileMenuOpen ? (
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
               </button>
             </div>
           </div>
         </div>
 
         {/* Mobile Navigation */}
-        <div className="md:hidden bg-asdvc-forest-light">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {navigation.map((item) => (
-              item.external ? (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block px-3 py-2 text-base transition-all duration-200 text-white hover:font-bold hover:underline hover:scale-105"
-                >
-                  {item.name}
-                  <svg className="inline-block w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </a>
-              ) : (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`block px-3 py-2 text-base transition-all duration-200 ${
-                    location.pathname === item.href
-                      ? 'text-white font-bold border-b-2 border-asdvc-gold'
-                      : 'text-white hover:font-bold hover:underline hover:scale-105'
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              )
-            ))}
-            
-            {/* Mobile DVC Dropdown */}
-            <div className="border-t border-asdvc-forest pt-2 mt-2">
-              <button
-                onClick={() => {
-                  setIsDvcOpen(!isDvcOpen)
-                  setIsCommitteesOpen(false)
-                  setIsBoardsOpen(false)
-                  setIsDocumentsOpen(false)
-                }}
-                className="block w-full text-left px-3 py-2 text-base transition-all duration-200 text-white hover:font-bold hover:underline hover:scale-105"
-              >
-                DVC
-                <svg className="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-asdvc-forest-light" data-mobile-menu>
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {navigation.map((item) => (
+                item.external ? (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-3 py-2 text-base transition-all duration-200 text-white hover:font-bold hover:underline hover:scale-105"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                    <svg className="inline-block w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                ) : (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={`block px-3 py-2 text-base transition-all duration-200 ${
+                      location.pathname === item.href
+                        ? 'text-white font-bold border-b-2 border-asdvc-gold'
+                        : 'text-white hover:font-bold hover:underline hover:scale-105'
+                    }`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                )
+              ))}
               
-              {isDvcOpen && (
-                <div className="ml-4 mt-1 space-y-1">
-                  {dvcLinks.map((link) => (
-                    <a
-                      key={link.name}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block px-3 py-2 text-sm transition-all duration-200 text-white hover:font-bold hover:underline hover:scale-105"
-                      onClick={() => setIsDvcOpen(false)}
-                    >
-                      {link.name}
-                      <svg className="inline-block w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </a>
-                  ))}
-                </div>
-              )}
+              {/* Mobile Committees Dropdown */}
+              <div className="border-t border-asdvc-forest pt-2 mt-2">
+                <button
+                  onClick={() => {
+                    setIsCommitteesOpen(!isCommitteesOpen)
+                    setIsBoardsOpen(false)
+                    setIsDocumentsOpen(false)
+                    setIsDvcOpen(false)
+                  }}
+                  className="block w-full text-left px-3 py-2 text-base transition-all duration-200 text-white hover:font-bold hover:underline hover:scale-105"
+                >
+                  Committees
+                  <svg className="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                
+                {isCommitteesOpen && (
+                  <div className="ml-4 mt-1 space-y-1">
+                    {committees.map((committee) => (
+                      <Link
+                        key={committee.name}
+                        to={committee.href}
+                        className={`block px-3 py-2 text-sm transition-all duration-200 ${
+                          location.pathname === committee.href
+                            ? 'text-white font-bold border-b border-asdvc-gold'
+                            : 'text-white hover:font-bold hover:underline hover:scale-105'
+                        }`}
+                        onClick={() => {
+                          setIsCommitteesOpen(false)
+                          setIsMobileMenuOpen(false)
+                        }}
+                      >
+                        {committee.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Mobile Boards Dropdown */}
+              <div className="border-t border-asdvc-forest pt-2 mt-2">
+                <button
+                  onClick={() => {
+                    setIsBoardsOpen(!isBoardsOpen)
+                    setIsCommitteesOpen(false)
+                    setIsDocumentsOpen(false)
+                    setIsDvcOpen(false)
+                  }}
+                  className="block w-full text-left px-3 py-2 text-base transition-all duration-200 text-white hover:font-bold hover:underline hover:scale-105"
+                >
+                  Boards
+                  <svg className="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                
+                {isBoardsOpen && (
+                  <div className="ml-4 mt-1 space-y-1">
+                    {boards.map((board) => (
+                      <Link
+                        key={board.name}
+                        to={board.href}
+                        className={`block px-3 py-2 text-sm transition-all duration-200 ${
+                          location.pathname === board.href
+                            ? 'text-white font-bold border-b border-asdvc-gold'
+                            : 'text-white hover:font-bold hover:underline hover:scale-105'
+                        }`}
+                        onClick={() => {
+                          setIsBoardsOpen(false)
+                          setIsMobileMenuOpen(false)
+                        }}
+                      >
+                        {board.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Mobile Documents Dropdown */}
+              <div className="border-t border-asdvc-forest pt-2 mt-2">
+                <button
+                  onClick={() => {
+                    setIsDocumentsOpen(!isDocumentsOpen)
+                    setIsCommitteesOpen(false)
+                    setIsBoardsOpen(false)
+                    setIsDvcOpen(false)
+                  }}
+                  className="block w-full text-left px-3 py-2 text-base transition-all duration-200 text-white hover:font-bold hover:underline hover:scale-105"
+                >
+                  Documents
+                  <svg className="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                
+                {isDocumentsOpen && (
+                  <div className="ml-4 mt-1 space-y-1">
+                    {documents.map((document) => (
+                      document.external ? (
+                        <a
+                          key={document.name}
+                          href={document.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block px-3 py-2 text-sm transition-all duration-200 text-white hover:font-bold hover:underline hover:scale-105"
+                          onClick={() => {
+                            setIsDocumentsOpen(false)
+                            setIsMobileMenuOpen(false)
+                          }}
+                        >
+                          {document.name}
+                          <svg className="inline-block w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                        </a>
+                      ) : (
+                        <Link
+                          key={document.name}
+                          to={document.href}
+                          className={`block px-3 py-2 text-sm transition-all duration-200 ${
+                            location.pathname === document.href
+                              ? 'text-white font-bold border-b border-asdvc-gold'
+                              : 'text-white hover:font-bold hover:underline hover:scale-105'
+                          }`}
+                          onClick={() => {
+                            setIsDocumentsOpen(false)
+                            setIsMobileMenuOpen(false)
+                          }}
+                        >
+                          {document.name}
+                        </Link>
+                      )
+                    ))}
+                  </div>
+                )}
+              </div>
+              
+              {/* Mobile DVC Dropdown */}
+              <div className="border-t border-asdvc-forest pt-2 mt-2">
+                <button
+                  onClick={() => {
+                    setIsDvcOpen(!isDvcOpen)
+                    setIsCommitteesOpen(false)
+                    setIsBoardsOpen(false)
+                    setIsDocumentsOpen(false)
+                  }}
+                  className="block w-full text-left px-3 py-2 text-base transition-all duration-200 text-white hover:font-bold hover:underline hover:scale-105"
+                >
+                  DVC
+                  <svg className="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                
+                {isDvcOpen && (
+                  <div className="ml-4 mt-1 space-y-1">
+                    {dvcLinks.map((link) => (
+                      <a
+                        key={link.name}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block px-3 py-2 text-sm transition-all duration-200 text-white hover:font-bold hover:underline hover:scale-105"
+                        onClick={() => {
+                          setIsDvcOpen(false)
+                          setIsMobileMenuOpen(false)
+                        }}
+                      >
+                        {link.name}
+                        <svg className="inline-block w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </header>
 
       {/* Main Content */}
