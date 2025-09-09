@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
 import { useEffect, useRef, useState } from 'react'
-import asdvcLogo from '../assets/asdvc_logo.jpg'
+import asdvcLogo from '../assets/asdvc_logo.avif'
 import dvcCampus from '../assets/dvc-campus.avif'
 import asdvcHome1 from '../assets/asdvc-home-1.avif'
 import asdvcHome2 from '../assets/asdvc-home-2.avif'

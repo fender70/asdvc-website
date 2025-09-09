@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router'
 import { useEffect, useState } from 'react'
-import asdvcLogo from '../assets/asdvc_logo.jpg'
+import asdvcLogo from '../assets/asdvc_logo.avif'
 
 const Layout = ({ children }) => {
   const location = useLocation()
