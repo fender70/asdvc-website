@@ -73,13 +73,13 @@ const HomePage = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center fade-in-up visible" id="hero-buttons">
               <Link 
                 to="/join" 
-                className="bg-gradient-to-r from-asdvc-forest to-asdvc-forest-light text-white px-8 py-3 rounded-lg font-semibold shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out active:scale-95"
+                className="bg-gradient-to-r from-asdvc-forest to-asdvc-forest-light text-white px-12 py-4 rounded-lg font-semibold text-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out active:scale-95"
               >
                 Join ASDVC
               </Link>
               <Link 
                 to="/about" 
-                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold shadow-md hover:bg-white hover:text-asdvc-forest hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out active:scale-95"
+                className="border-2 border-white text-white px-12 py-4 rounded-lg font-semibold text-lg shadow-md hover:bg-white hover:text-asdvc-forest hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out active:scale-95"
               >
                 Learn More
               </Link>
@@ -150,7 +150,7 @@ const HomePage = () => {
               </p>
               <Link 
                 to="/about" 
-                className="bg-gradient-to-r from-asdvc-forest to-asdvc-forest-light text-white px-8 py-3 rounded-lg font-semibold shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out active:scale-95 inline-block"
+                className="bg-gradient-to-r from-asdvc-forest to-asdvc-forest-light text-white px-12 py-4 rounded-lg font-semibold text-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out active:scale-95 inline-block"
               >
                 Learn More About Us
               </Link>
@@ -189,7 +189,7 @@ const HomePage = () => {
               </p>
               <Link 
                 to="/events" 
-                className="bg-gradient-to-r from-asdvc-forest to-asdvc-forest-light text-white px-8 py-3 rounded-lg font-semibold shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out active:scale-95 inline-block"
+                className="bg-gradient-to-r from-asdvc-forest to-asdvc-forest-light text-white px-12 py-4 rounded-lg font-semibold text-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out active:scale-95 inline-block"
               >
                 View Upcoming Events
               </Link>
@@ -217,7 +217,7 @@ const HomePage = () => {
               </p>
               <Link 
                 to="/about-dvc" 
-                className="bg-gradient-to-r from-asdvc-forest to-asdvc-forest-light text-white px-8 py-3 rounded-lg font-semibold shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out active:scale-95 inline-block"
+                className="bg-gradient-to-r from-asdvc-forest to-asdvc-forest-light text-white px-12 py-4 rounded-lg font-semibold text-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 ease-out active:scale-95 inline-block"
               >
                 Learn More
               </Link>
